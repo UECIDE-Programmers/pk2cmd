@@ -1,0 +1,11 @@
+name=pk2cmd
+description=Upload to PIC18 board via pk2cmd
+
+programmer.method=script
+programmer.script.0=__builtin_echo::Programming...
+programmer.script.1.linux_amd64=${programmer:root}/tools/linux64/pk2cmd::-p::-f${filename}.hex::-M::-R
+programmer.sript.1.linux_i386=${programmer:root}/tools/linux32/pk2cmd::-p::-f${filename}.hex::-M::-R
+programmer.sript.1.linux_arm=${programmer:root}/tools/linux_arm/pk2cmd::-p::-f${filename}.hex::-M::-R
+programmer.script.1=__builtin_error::Your OS is not supported.
+
+family=pic18
