@@ -1,11 +1,36 @@
 name=pk2cmd
 description=Upload to PIC18 board via pk2cmd
 
+programmer.pk2cmd.power.true=-T
+programmer.pk2cmd.power.false=
+
 programmer.method=script
 programmer.script.0=__builtin_echo::Programming...
-programmer.script.1.linux_amd64=${programmer:root}/tools/linux64/pk2cmd::-p::-f${filename}.hex::-M::-R
-programmer.sript.1.linux_i386=${programmer:root}/tools/linux32/pk2cmd::-p::-f${filename}.hex::-M::-R
-programmer.sript.1.linux_arm=${programmer:root}/tools/linux_arm/pk2cmd::-p::-f${filename}.hex::-M::-R
+programmer.script.1.linux_amd64=${programmer:root}/tools/linux64/pk2cmd::-p::-f${filename}.hex::-M::-R::-L${prefs:programmers.pk2cmd.speed}::${programmer.pk2cmd.power.${prefs:programmers.pk2cmd.keeppower}}::-JN
+programmer.sript.1.linux_i386=${programmer:root}/tools/linux32/pk2cmd::-p::-f${filename}.hex::-M::-R::-L${prefs:programmers.pk2cmd.speed}::${programmer.pk2cmd.power.${prefs:programmers.pk2cmd.keeppower}}::-JN
+programmer.sript.1.linux_arm=${programmer:root}/tools/linux_arm/pk2cmd::-p::-f${filename}.hex::-M::-R::-L${prefs:programmers.pk2cmd.speed}::${programmer.pk2cmd.power.${prefs:programmers.pk2cmd.keeppower}}::-JN
 programmer.script.1=__builtin_error::Your OS is not supported.
 
 family=pic18::pic16
+
+prefs.programmers.type = section
+prefs.programmers.name = Programmers
+
+prefs.programmers.pk2cmd.type = section
+prefs.programmers.pk2cmd.name = PICkit2 (PIC16/PIC18, pk2cmd)
+prefs.programmers.pk2cmd.speed.type = dropdown
+prefs.programmers.pk2cmd.speed.name = Communication Speed
+prefs.programmers.pk2cmd.speed.default = 1
+prefs.programmers.pk2cmd.speed.options.1 = 1 (fastest)
+prefs.programmers.pk2cmd.speed.options.2 = 2
+prefs.programmers.pk2cmd.speed.options.3 = 3
+prefs.programmers.pk2cmd.speed.options.4 = 4
+prefs.programmers.pk2cmd.speed.options.5 = 5
+prefs.programmers.pk2cmd.speed.options.6 = 6
+prefs.programmers.pk2cmd.speed.options.7 = 7
+prefs.programmers.pk2cmd.speed.options.8 = 8
+prefs.programmers.pk2cmd.speed.options.9 = 9 (slowest)
+
+prefs.programmers.pk2cmd.keeppower.type = checkbox
+prefs.programmers.pk2cmd.keeppower.name = Keep power on after programming
+prefs.programmers.pk2cmd.keeppower.default = false
